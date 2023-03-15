@@ -1,5 +1,5 @@
 public class Simulation {
-    RandNumberGenerator rng;
+    private RandNumberGenerator rng;
     Simulation() {
         this.rng = new RandNumberGenerator();
     }
