@@ -10,7 +10,7 @@ public class RandNumberGenerator {
     public RandNumberGenerator() {
         this.x_prev = 1000;
         this.cnt = 0;
-        this.x_i = getNextX();
+        this.x_i = 1000;
     }
 
     private long getNextX(){
@@ -20,8 +20,8 @@ public class RandNumberGenerator {
 
     public float getNextU() {
         long temp = this.x_i;
-        this.x_i = getNextX();
         this.x_prev = temp;
+        this.x_i = getNextX();
         return ((float) this.x_i/this.K);
     }
 
