@@ -18,8 +18,9 @@ public class Simulation {
                     break;
                 case AVAILABLE:
                     int t = availAnswersTime();
-                    if (t < 25) return time + t; // adds the time it took to pickup, then ends because we have pickup
-                    else time += 25;
+                    //System.out.println(t);
+                    if (time == -1) time += 25;
+                    else return time + t; // adds the time it took to pickup, then ends because we have pickup
                     break;
             }
 
@@ -36,16 +37,16 @@ public class Simulation {
     }
 
     private int availAnswersTime() {
-        for (int i = 0; i < 25; i++) {
+        for (int i = 0; i <= 25; i++) {
             if (rng.getNextU() < getProbSec(i)) {
                 return i;
             }
         }
-        return 25; // over the time limit
+        return -1; // over the time limit
     }
 
     private float getProbSec(int time) {
-        return ((float) 1/12) - (float) Math.exp((float) time * ((float) -1/12));
+        return ((float) 1/12) * (float) Math.exp((float) time * ((float) -1/12));
     }
 
 
