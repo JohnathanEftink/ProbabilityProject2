@@ -13,16 +13,16 @@ public class RandNumberGenerator {
         this.x_i = 1000;
     }
 
-    private long getNextX(){
+    private long getNextX() {
         this.cnt++;
-        return (this.a * this.x_prev + this.c) % this.K;
+        return (a * this.x_prev + c) % K;
     }
 
     public float getNextU() {
         long temp = this.x_i;
         this.x_prev = temp;
         this.x_i = getNextX();
-        return ((float) this.x_i/this.K);
+        return ((float) this.x_i / K);
     }
 
     public int getCurrentCount() {
