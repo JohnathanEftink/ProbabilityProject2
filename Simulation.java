@@ -19,7 +19,7 @@ public class Simulation {
                 case AVAILABLE:
                     int t = availAnswersTime();
                     //System.out.println(t);
-                    if (time == -1) time += 25;
+                    if (t == -1) time += 25;
                     else return time + t; // adds the time it took to pickup, then ends because we have pickup
                     break;
             }
