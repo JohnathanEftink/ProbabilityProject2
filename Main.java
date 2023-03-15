@@ -2,9 +2,13 @@ public class Main {
 
     public static void main(String[] args) {
         Simulation sim = new Simulation();
-        for (int i = 0; i < 500; i++) {
-            System.out.println(i+1 + ": " + sim.callSimulationCallTime());
-
+        long sum = 0;
+        int sims = 500;
+        for (int i = 0; i < sims; i++) {
+            int temp = sim.callSimulationCallTime();
+            sum += temp;
+            System.out.println(i+1 + ": " + temp);
         }
+        System.out.println("Mean Call Time: " + sum/(float) sims);
     }
 }
