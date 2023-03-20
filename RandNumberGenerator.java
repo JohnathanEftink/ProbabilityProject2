@@ -15,6 +15,7 @@ public class RandNumberGenerator {
 
     private long getNextX() {
         this.cnt++;
+        //if(cnt == 51 || cnt == 52 || cnt == 53){System.out.println(((double)(a * this.x_prev + c) % K)/K);} /* line to print 51,52,53 values of u*/
         return (a * this.x_prev + c) % K;
     }
 
