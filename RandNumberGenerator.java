@@ -19,11 +19,11 @@ public class RandNumberGenerator {
         return (a * this.x_prev + c) % K;
     }
 
-    public float getNextU() {
+    public double getNextU() {
         long temp = this.x_i;
         this.x_prev = temp;
         this.x_i = getNextX();
-        return ((float) this.x_i / K);
+        return ((double) this.x_i / K);
     }
 
     public int getCurrentCount() {

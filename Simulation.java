@@ -1,52 +1,46 @@
 public class Simulation {
-    private RandNumberGenerator rng;
+    private final RandNumberGenerator rng;
     Simulation() {
         this.rng = new RandNumberGenerator();
     }
 
-    public int callSimulationCallTime() {
+    public double callSimulationCallTime() {
         int cnt = 0;
-        int time = 6; // six seconds to turn on and dial
+        double time = 0; // six seconds to turn on and dial
         while (cnt < 4) {
+            time += 6.0; // time to dial the call
             Status resp = simulateCustomerStatus();
             switch (resp) {
-                case BUSY:
+                case BUSY -> {
                     time += 3; // 3 seconds when busy
-                    break;
-                case UNAVAILABLE:
+                    time += 1; // 1 second hang-up time
+                }
+                case UNAVAILABLE -> {
                     time += 25; // 25 seconds for full ringing when unavailable
-                    break;
-                case AVAILABLE:
-                    int t = availAnswersTime();
+                    time += 1; // 1 second hang-up time
+                }
+                case AVAILABLE -> {
+                    double t = getTimeTaken();
                     //System.out.println(t);
-                    if (t == -1) time += 25;
+                    if (t > 25) time += 26; // the 25 seconds plus 1 second hangup time
                     else return time + t; // adds the time it took to pickup, then ends because we have pickup
-                    break;
+                }
             }
-
             cnt++;
         }
         return time;
     }
 
     private Status simulateCustomerStatus() {
-        float rand = this.rng.getNextU();
+        double rand = this.rng.getNextU();
         if (rand <= 0.2) return Status.BUSY;
         else if (rand > 0.2 && rand <= 0.5) return Status.UNAVAILABLE;
         else return Status.AVAILABLE;
     }
 
-    private int availAnswersTime() {
-        for (int i = 0; i <= 25; i++) {
-            if (rng.getNextU() < getProbSec(i)) {
-                return i;
-            }
-        }
-        return -1; // over the time limit
-    }
 
-    private float getProbSec(int time) {
-        return ((float) 1/12) * (float) Math.exp((float) time * ((float) -1/12));
+    private double getTimeTaken() {
+        return Math.log(1 - this.rng.getNextU()) * (-12.0);
     }
 
 
