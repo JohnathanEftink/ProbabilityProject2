@@ -10,7 +10,7 @@ public class Main {
         for (int i = 0; i < sims; i++) {
             double temp = sim.callSimulationCallTime();
             sum += temp;
-            //System.out.println(i+1 + ": " + temp);
+            System.out.println(i+1 + ": " + temp);
             timesList[i] = temp;
         }
         Arrays.sort(timesList);
